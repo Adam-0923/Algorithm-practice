@@ -5,20 +5,26 @@ int main(){
     cin>>m>>n;
     int count=0;
     vector<int> M;
-    auto j=M.begin();
-    for(int i=0;i<n;i++){
+    for(int j=0;j<n;j++){
         int a;
-        goal:
         cin>>a;
-        for(int x=0;x<m;x++){
-            if(*(j+x)==a){
-                i++;
-                goto goal;
+        bool found=false;
+        for(auto i=M.begin();i!=M.end();i++){
+            if(*i==a){
+                found=true;
+                break;
             }
         }
-        M.push_back(a);
-        j++;
-        count++;
+        if(!found){
+            count++;
+            if(M.size()>=m){
+                M.erase(M.begin());
+                M.push_back(a);
+            }
+            else{
+                M.push_back(a);
+            }
+        }
     }
     cout<<count<<endl;
     return 0;
